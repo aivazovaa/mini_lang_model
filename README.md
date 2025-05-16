@@ -9,4 +9,4 @@ cd mini_lang_model
 pip install -r requirements.txt
 
 # 3. Run demo
-python src/main.py
+python3 src/main.py
