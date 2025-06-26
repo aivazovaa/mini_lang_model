@@ -1,4 +1,4 @@
-```markdown
+
 # Mini Programming Language Model
 
 An LSTM-based neural network that generates simple programming code sequences, designed for educational purposes.
