@@ -1,12 +1,12 @@
-import torch.nn as nn
-import torch
-class CodeGenerator(nn.Module):
-    def __init__(self,vocab_size,emb_dim=128,hidden_dim=256,pad_idx=0):
-        super().__init__()
-        self.emb=nn.Embedding(vocab_size,emb_dim,padding_idx=pad_idx)
-        self.lstm=nn.LSTM(emb_dim,hidden_dim,num_layers=1,batch_first=True)
-        self.fc=nn.Linear(hidden_dim,vocab_size)
-    def forward(self,x):
-        emb=self.emb(x)
-        out,_=self.lstm(emb)
-        return self.fc(out[:,-1,:])
+from tensorflow.keras import layers, models
+
+def build_model(vocab_size, embedding_dim=128, rnn_units=256):
+    model = models.Sequential([
+        layers.Embedding(input_dim=vocab_size, output_dim=embedding_dim),
+        layers.LSTM(rnn_units, return_sequences=True),
+        layers.Dropout(0.2),
+        layers.LSTM(rnn_units),
+        layers.Dropout(0.2),
+        layers.Dense(vocab_size, activation='softmax')
+    ])
+    return model
